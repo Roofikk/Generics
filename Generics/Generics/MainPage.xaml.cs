@@ -19,7 +19,6 @@ namespace Generics
         {
             Xamarin.Forms.Application.Current.On<Xamarin.Forms.PlatformConfiguration.Android>().UseWindowSoftInputModeAdjust(WindowSoftInputModeAdjust.Resize);
             Title = "Generic drugs";
-            SearchBarRenderer
 
             InitializeComponent();
         }
@@ -29,20 +28,21 @@ namespace Generics
             if (medicamentList.SelectedItem != null)
             {
                 string formReleases = await App.MedRequest.GetSelectedMedicament(e.SelectedItem);
+                string chemistryName = await App.MedRequest.GetChemistryName((Medicament)e.SelectedItem);
                 Medicament selectedMed = (Medicament)e.SelectedItem;
                 string[] formRelease = formReleases.Split('\n');
                 List<Medicament> list = new List<Medicament>();
                 foreach (var i in formRelease)
                 {
-                    Medicament med = new Medicament { FormRelease = i, TradeName = selectedMed.TradeName };
+                    Medicament med = new Medicament { FormRelease = i, TradeName = selectedMed.TradeName, ChemistryName = chemistryName};
                     list.Add(med);
                 }
 
                 list.RemoveAt(list.Count - 1);
 
-                ReleasePage medicamentPage = new ReleasePage(selectedMed.TradeName)
+                ReleasePage medicamentPage = new ReleasePage()
                 { 
-                    Title = "Select form release"
+                    Title = selectedMed.TradeName
                 };
                 medicamentPage.BindingContext = list;
                 await Navigation.PushAsync(medicamentPage);
@@ -62,7 +62,6 @@ namespace Generics
                     Medicament med = new Medicament { TradeName = i };
                     list.Add(med);
                 }
-                list.RemoveAt(list.Count - 1);
                 medicamentList.ItemsSource = list;
             }
             else

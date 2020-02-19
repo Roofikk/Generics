@@ -7,10 +7,12 @@
              x:Class="Generics.GenericPage">
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!" 
+            <Label Text="Generics:" 
                    Padding="20"/>
             <ListView x:Name="medicamentList" 
-                  ItemsSource="{Binding}">
+                      ItemsSource="{Binding}"
+                      SeparatorVisibility="None"
+                      SelectionMode="None">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
