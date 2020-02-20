@@ -44,7 +44,7 @@ namespace Generics
                     medList.Add(m);
                 }
 
-                GenericPage genericPage = new GenericPage();
+                GenericPage genericPage = new GenericPage { Title = "Generics of " + this.Title + ":" };
                 genericPage.BindingContext = medList;
                 await Navigation.PushAsync(genericPage);
                 formReleaseList.SelectedItem = null;

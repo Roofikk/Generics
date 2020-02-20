@@ -17,8 +17,9 @@
                     <DataTemplate>
                         <ViewCell>
                             <ViewCell.View>
-                                <StackLayout Orientation="Horizontal">
-                                    <Label Text="{Binding TradeName}" FontSize="Medium" />
+                                <StackLayout Orientation="Horizontal"
+                                             Padding="50, 0, 0, 0">
+                                    <Label Text="{Binding TradeName}" FontSize="Medium" VerticalTextAlignment="Center" />
                                 </StackLayout>
                             </ViewCell.View>
                         </ViewCell>

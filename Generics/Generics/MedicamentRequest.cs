@@ -13,7 +13,7 @@ namespace Generics
         readonly string ip = CrossLocalhost.Current.Ip;
         public async Task<string> GetTradeName(string text)
         {
-            string strReq = "http://192.168.0.158:3000/?type_request=get_names&words=";
+            string strReq = "http://" + ip + ":3000/?type_request=get_names&words=";
             HttpResponseMessage response = await client.GetAsync(strReq += text);
             HttpContent responseContent = response.Content;
             return await responseContent.ReadAsStringAsync();
@@ -44,7 +44,7 @@ namespace Generics
             string strReq = "http://" + ip + ":3000/?type_request=get_chemistryName&name=";
             strReq += med.TradeName;
 
-            HttpResponseMessage response = await client.GetAsync(strReq);
+             HttpResponseMessage response = await client.GetAsync(strReq);
             HttpContent responseContent = response.Content;
             return await responseContent.ReadAsStringAsync();
         }

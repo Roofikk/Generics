@@ -11,8 +11,8 @@
                 <DataTemplate>
                     <ViewCell>
                         <ViewCell.View>
-                            <StackLayout Orientation="Horizontal">
-                                <Label Text="{Binding FormRelease}" FontSize="Medium" />
+                            <StackLayout Orientation="Horizontal" Padding="50, 0, 0, 0">
+                                <Label Text="{Binding FormRelease}" FontSize="Medium" VerticalTextAlignment="Center" />
                             </StackLayout>
                         </ViewCell.View>
                     </ViewCell>
