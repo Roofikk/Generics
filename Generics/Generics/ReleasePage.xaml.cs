@@ -24,28 +24,28 @@ namespace Generics
             {
                 Medicament med = (Medicament)e.SelectedItem;
                 string strGenerics = await App.MedRequest.GetGeneric(med);
-                //Следует удалить
-                string[] strParse = strGenerics.Split("}{".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
-                string newStr = "[{";
-                for (int i = 0; i < strParse.Length; i++)
-                {
-                    if (i != strParse.Length - 1)
-                        newStr += strParse[i] + "},{";
-                    else
-                        newStr += strParse[i];
-                }
-                newStr += "}]";
-                //Следует удалить
-                JArray o = JArray.Parse(newStr);
+                JArray o = JArray.Parse(strGenerics);
                 Medicament[] medicaments = JsonConvert.DeserializeObject<Medicament[]>(o.ToString());
+                Dictionary<string, List<Medicament>> medDict = new Dictionary<string, List<Medicament>>();
                 List<Medicament> medList = new List<Medicament>();
+                List<Medicament> medListView = new List<Medicament>();
                 foreach (var m in medicaments)
                 {
                     medList.Add(m);
+                    if (!medDict.ContainsKey(m.TradeName))
+                    {
+                        medDict.Add(m.TradeName, new List<Medicament> { m });
+                        medListView.Add(m);
+                    }
+                    else
+                    {
+                        medDict[m.TradeName].Add(m);
+                    }
                 }
 
-                GenericPage genericPage = new GenericPage { Title = "Generics of " + this.Title + ":" };
-                genericPage.BindingContext = medList;
+
+                GenericPage genericPage = new GenericPage(medDict) { Title = "Generics of " + this.Title + ":",
+                                                            BindingContext = medListView};
                 await Navigation.PushAsync(genericPage);
                 formReleaseList.SelectedItem = null;
             }

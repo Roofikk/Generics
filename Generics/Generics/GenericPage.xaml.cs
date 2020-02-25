@@ -12,9 +12,13 @@ namespace Generics
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class GenericPage : ContentPage
     {
-        public GenericPage()
+        Dictionary<string, List<Medicament>> medDict = new Dictionary<string, List<Medicament>>();
+        public GenericPage(Dictionary<string, List<Medicament>> md)
         {
             InitializeComponent();
+
+            List<Medicament> medList = (List<Medicament>)genericList.ItemsSource;
+            medDict = md;
         }
     }
 }

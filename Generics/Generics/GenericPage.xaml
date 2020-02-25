@@ -9,7 +9,7 @@
         <StackLayout>
             <Label Text="Generics:" 
                    Padding="20"/>
-            <ListView x:Name="medicamentList" 
+            <ListView x:Name="genericList" 
                       ItemsSource="{Binding}"
                       SeparatorVisibility="None"
                       SelectionMode="None">

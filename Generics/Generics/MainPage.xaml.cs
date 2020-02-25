@@ -15,6 +15,8 @@ namespace Generics
     [DesignTimeVisible(false)]
     public partial class MainPage : ContentPage
     {
+        List<Medicament> medList = new List<Medicament>();
+        
         public MainPage()
         {
             Xamarin.Forms.Application.Current.On<Xamarin.Forms.PlatformConfiguration.Android>().UseWindowSoftInputModeAdjust(WindowSoftInputModeAdjust.Resize);
@@ -54,19 +56,39 @@ namespace Generics
             HttpClient client = new HttpClient();
             if (e.NewTextValue.Length > 2)
             {
-                string tradeNames = await App.MedRequest.GetTradeName(e.NewTextValue);
-                string[] tradeName = tradeNames.Split('\n');
-                List<Medicament> list = new List<Medicament>();
-                foreach (var i in tradeName)
+                if (e.NewTextValue.Length == 3 && medList.Count == 0)
                 {
-                    Medicament med = new Medicament { TradeName = i };
-                    list.Add(med);
+                    string tradeNames = await App.MedRequest.GetTradeName(e.NewTextValue);
+                    string[] tradeName = tradeNames.Split('\n');
+                    foreach (var i in tradeName)
+                    {
+                        Medicament med = new Medicament { TradeName = i };
+                        medList.Add(med);
+                    }
+
+                    medicamentList.ItemsSource = medList;
                 }
-                medicamentList.ItemsSource = list;
+                else
+                {
+                    int i = 0;
+                    List<Medicament> newListMed = new List<Medicament>();
+                    
+                    foreach (var m in medList)
+                    {
+                        if (m.TradeName.ToLower().StartsWith(e.NewTextValue.ToLower()))
+                        {
+                            newListMed.Add(m);
+                            i++;
+                        }
+                    }
+
+                    medicamentList.ItemsSource = newListMed;
+                }
             }
             else
             {
                 medicamentList.ItemsSource = null;
+                medList.Clear();
             }
         }
     }
