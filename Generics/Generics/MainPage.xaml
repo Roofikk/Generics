@@ -18,8 +18,12 @@
                 <DataTemplate>
                     <ViewCell>
                         <ViewCell.View>
-                            <StackLayout Orientation="Horizontal" Padding="50, 0, 0, 0">
-                                <Label Text="{Binding TradeName}" FontSize="Medium" VerticalTextAlignment="Center" />
+                            <StackLayout Orientation="Horizontal" 
+                                         Padding="50, 0, 50, 0">
+                                <Label Text="{Binding TradeName}" 
+                                       FontSize="Medium" 
+                                       VerticalTextAlignment="Center"  
+                                       TextColor="Black"/>
                             </StackLayout>
                         </ViewCell.View>
                     </ViewCell>

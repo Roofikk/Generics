@@ -14,8 +14,8 @@ namespace Generics
         string domen = "http://192.168.0.158:3000/?type_request=";
         public async Task<string> GetTradeName(string text)
         {
-            string strReq = domen + "get_names&words=";
-            HttpResponseMessage response = await client.GetAsync(strReq += text);
+            string strReq = domen + "get_names&words=" + text;
+            HttpResponseMessage response = await client.GetAsync(strReq);
             HttpContent responseContent = response.Content;
             return await responseContent.ReadAsStringAsync();
         }
@@ -23,9 +23,9 @@ namespace Generics
         public async Task<string> GetSelectedMedicament(object e)
         {
             Medicament med = (Medicament)e;
-            string strReq = domen + "get_condition&name=";
+            string strReq = domen + "get_condition&name=" + med.TradeName;
 
-            HttpResponseMessage response = await client.GetAsync(strReq += med.TradeName);
+            HttpResponseMessage response = await client.GetAsync(strReq);
             HttpContent responseContent = response.Content;
             return await responseContent.ReadAsStringAsync();
         }

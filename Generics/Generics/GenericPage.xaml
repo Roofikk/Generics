@@ -11,15 +11,23 @@
                    Padding="20"/>
             <ListView x:Name="genericList" 
                       ItemsSource="{Binding}"
-                      SeparatorVisibility="None"
+                      HasUnevenRows="True"
+                      SeparatorVisibility="Default"
                       SelectionMode="None">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
                             <ViewCell.View>
-                                <StackLayout Orientation="Horizontal"
-                                             Padding="50, 0, 0, 0">
-                                    <Label Text="{Binding TradeName}" FontSize="Medium" VerticalTextAlignment="Center" />
+                                <StackLayout Orientation="Vertical"
+                                             Padding="50, 5, 50, 5">
+                                    <Label Text="{Binding TradeName}" 
+                                           FontSize="Medium" 
+                                           VerticalTextAlignment="Center" 
+                                           TextColor="Black"/>
+                                    <Label Text="ХУЙЯРА" 
+                                           FontSize="Micro" 
+                                           VerticalTextAlignment="Center" 
+                                           TextColor="Red"/>
                                 </StackLayout>
                             </ViewCell.View>
                         </ViewCell>

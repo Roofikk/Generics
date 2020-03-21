@@ -6,13 +6,20 @@
              mc:Ignorable="d"
              x:Class="Generics.ReleasePage">
     <StackLayout>
-        <ListView x:Name="formReleaseList" ItemsSource="{Binding}" ItemSelected="OnItemSelected">
+        <ListView x:Name="formReleaseList" 
+                  ItemsSource="{Binding}" 
+                  ItemSelected="OnItemSelected" 
+                  HasUnevenRows="True">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
                         <ViewCell.View>
-                            <StackLayout Orientation="Horizontal" Padding="50, 0, 0, 0">
-                                <Label Text="{Binding FormRelease}" FontSize="Medium" VerticalTextAlignment="Center" />
+                            <StackLayout Orientation="Horizontal" 
+                                         Padding="50, 5, 50, 5">
+                                <Label Text="{Binding FormRelease}" 
+                                       FontSize="Medium" 
+                                       VerticalTextAlignment="Center"  
+                                       TextColor="Black"/>
                             </StackLayout>
                         </ViewCell.View>
                     </ViewCell>
